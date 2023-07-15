@@ -1,12 +1,4 @@
-import express from "express"
-import ejs from "ejs"
-
-const app = express()
-app.set("view engine", "ejs")
-
-app.get("/", async (req, res) => {
-    res.render("index")
-})
+import { app } from "./src/app.js"
 
 
 const port = 3000
