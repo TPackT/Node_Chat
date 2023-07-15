@@ -6,6 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Index page</h1>
+    <ul style="list-style-type: none">
+        <% for (const message of messages) { %>
+          <li class="messages-item">
+            <%= message.text %>
+            <%= message.authorId %>
+          </li>
+          <% } %>
+      </ul>
+        
 </body>
 </html>
