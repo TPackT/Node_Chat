@@ -5,7 +5,9 @@ import { router as chatroomsRouter } from "./routes/chatrooms-router.js"
 
 export const app = express()
 app.set("view engine", "ejs")
+
 app.use(express.urlencoded({extended: true}))
+//middleware for form values formatting
 
 app.get("/", async (req, res) => {
     const messages = await db("messages").select("*")
