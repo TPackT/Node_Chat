@@ -14,6 +14,21 @@
           </li>
           <% } %>
       </ul>
+
+    <ul style="list-style-type: none">
+        <% for (const chatroom of chatrooms) { %>
+          <li class="chatrooms-item">
+            <%= chatroom.name %>
+            <%= chatroom.authorId %>
+          </li>
+          <% } %>
+      </ul>
+
+      <form action="/create-chatroom" method="post">
+        <input type="text" name="name">
+        <input type="password" name="password">
+        <button type="submit">Create</button>
+      </form>
         
 </body>
 </html>
