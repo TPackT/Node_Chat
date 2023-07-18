@@ -31,6 +31,20 @@
         <input type="password" name="password">
         <button type="submit">Create</button>
       </form>
+
+
+      <% if (user) { %>
+        <%= user.username %>
+        <a href="/logout">Odhlásit se</a>
+    
+
+
+        <div id="login-register">
+          <% } else { %>
+            <a href="/register">Registrace</a>
+            <a href="/login">Login</a>
+            <% } %>
+        </div>
         
 </body>
 </html>

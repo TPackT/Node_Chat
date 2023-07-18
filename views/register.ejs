@@ -1,0 +1,13 @@
+<%- include("_header") %>
+
+    <h1>Registrace</h1>
+    <form action="/register" method="post">
+        <input type="text" name="username" />
+        <input type="password" name="password" />
+        <button type="submit">Registrovat se</button>
+    </form>
+    
+    <a href="/login">Login</a>
+    <a href="/">Back</a>
+
+<%- include("_footer") %>

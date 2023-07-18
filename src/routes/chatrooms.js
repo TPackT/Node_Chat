@@ -6,7 +6,6 @@ import { getAllMessagesByChatroom } from "../database/messages.js"
 export const router = express.Router()
 
 router.post("/create-chatroom", async (req, res) => {
-    console.log(req.body)
     const name = req.body.name
     const password = req.body.password
     //const authorId = req.body.user.id
