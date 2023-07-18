@@ -1,6 +1,6 @@
 import express from "express"
 import { db } from "./database.js"
-import { router as chatroomsRouter } from "./routes/chatrooms-router.js"
+import { router as chatroomsRouter } from "./routes/chatrooms.js"
 
 
 export const app = express()
