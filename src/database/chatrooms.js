@@ -9,3 +9,16 @@ export const createChatroom = async (name, password) => {
 
     return chatroom
     }
+
+export const deleteChatroom = async(chatroomId) => {
+    try {
+        await db("chatrooms").delete().where("id", chatroomId)
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+export const getChatroomById = async (chatroomId) => {
+    const chatroom = await db("chatrooms").where("id", chatroomId).first()
+    return chatroom 
+}
