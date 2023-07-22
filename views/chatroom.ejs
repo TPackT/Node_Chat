@@ -14,6 +14,7 @@
           <li class="messages-item">
             <%= message.text %>
             <%= message.authorId %>
+            <a href="/delete-message/<%= message.id%>">Delete</a>
           </li>
           <% } %>
       </ul>
