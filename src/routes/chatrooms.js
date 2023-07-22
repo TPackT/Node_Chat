@@ -1,7 +1,7 @@
 import express from "express"
 import { db } from "../database.js"
 import { createChatroom, getChatroomById, deleteChatroom } from "../database/chatrooms.js"
-import { getAllMessagesByChatroom } from "../database/messages.js"
+import { getAllMessagesByChatroom, getAllMessagesWithUsernames } from "../database/messages.js"
 
 export const router = express.Router()
 
@@ -19,9 +19,11 @@ router.get("/get-chatroom/:id", async (req, res) => {
     const chatroomId = Number(req.params.id)
     const chatroom = await getChatroomById(chatroomId)
     const messages = await getAllMessagesByChatroom(chatroomId)
+    const messagesWithUsernames = await getAllMessagesWithUsernames(messages)
+    
     res.render("chatroom", {
         chatroom: chatroom, 
-        messages: messages,
+        messages: messagesWithUsernames,
     })
 })
 

@@ -28,7 +28,7 @@ export const getUserByToken = async (token) => {
 }
 
 export const getUserById = async (userId) => {
-    const user = await db("users").where("id", userId)
+    const user = await db("users").where("id", userId).first()
     return user
 }
 

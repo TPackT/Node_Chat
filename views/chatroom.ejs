@@ -13,7 +13,7 @@
         <% for (const message of messages) { %>
           <li class="messages-item">
             <%= message.text %>
-            <%= message.authorId %>
+            <%= message.author %>
             <%= message.cts.split(" ")[1] %>
             <a href="/delete-message/<%= message.id%>">Delete</a>
           </li>
