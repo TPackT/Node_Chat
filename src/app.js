@@ -29,3 +29,7 @@ app.get("/", async (req, res) => {
 app.use(usersRouter)
 app.use(chatroomsRouter)
 app.use(messagesRouter)
+
+app.use((req, res) => {
+    res.status(404).render('404')
+  })
