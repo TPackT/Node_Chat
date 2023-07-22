@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <ul style="list-style-type: none">
-        <% for (const message of messages) { %>
-          <li class="messages-item">
-            <%= message.text %>
-            <%= message.authorId %>
-          </li>
-          <% } %>
-      </ul>
+<%- include("_header") %>
+
+    
 
     <ul style="list-style-type: none">
         <% for (const chatroom of chatrooms) { %>
@@ -36,7 +23,7 @@
 
       <% if (user) { %>
         <%= user.username %>
-        <a href="/logout">Odhlásit se</a>
+        <a href="/logout">Log out</a>
     
 
 
@@ -47,5 +34,4 @@
             <% } %>
         </div>
         
-</body>
-</html>
+<%- include("_footer") %>

@@ -1,29 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<%- include("_header") %>
 
     <h2><%= chatroom.name %></h2>
 
-    <ul style="list-style-type: none">
-        <% for (const message of messages) { %>
-          <li class="messages-item">
-            <%= message.text %>
-            <%= message.authorId %>
-            <a href="/delete-message/<%= message.id%>">Delete</a>
-          </li>
-          <% } %>
-      </ul>
+    <a href="/">Back to main page</a>
 
+
+    <div id="messages">
+      <%- include("_messages") %>
+    </div>
+
+    
       <form action="/create-message" method="post"">
         <input type="text" name="text">
         <input type="hidden" name="chatroomId" value="<%= chatroom.id %>" />
         <button type="submit">Send</button>
       </form>
 
-</body>
-</html>
+      <%- include("_footer") %>

@@ -1,8 +1,21 @@
 import { db }from "../database.js"
+import { getUserById } from "./users.js"
 
 export const getAllMessagesByChatroom = async (chatroomId) => {
     const messages = await db("messages").select("*").where("chatroomId", chatroomId)
     return messages
+}
+
+export const getAllMessagesWithUsernames = async (messages) => {
+    const messagesWithUsernames = await Promise.all(
+        messages.map(async (msg) => {
+            const user = await getUserById(msg.authorId)
+            //spreading msg object - new username property from user.username if user is truthy.. Unknown User if not
+            return { ...msg, author: user ? user.username : "Unknown User" }
+          })
+        )
+        
+    return messagesWithUsernames
 }
 
 export const createMessage = async (message) => {
