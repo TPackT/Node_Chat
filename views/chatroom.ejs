@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+
+    <h2><%= chatroom.name %></h2>
+
     <ul style="list-style-type: none">
         <% for (const message of messages) { %>
           <li class="messages-item">
@@ -14,6 +17,12 @@
           </li>
           <% } %>
       </ul>
+
+      <form action="/create-message" method="post"">
+        <input type="text" name="text">
+        <input type="hidden" name="chatroomId" value="<%= chatroom.id %>" />
+        <button type="submit">Send</button>
+      </form>
 
 </body>
 </html>
