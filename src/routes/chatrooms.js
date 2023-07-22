@@ -15,7 +15,7 @@ router.post("/create-chatroom", async (req, res) => {
     res.redirect("/")
 })
 
-router.get("/get-chatroom/:id", async (req, res) => {
+router.get("/chatroom/:id", async (req, res) => {
     const chatroomId = Number(req.params.id)
     const chatroom = await getChatroomById(chatroomId)
     const messages = await getAllMessagesByChatroom(chatroomId)
