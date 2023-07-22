@@ -4,10 +4,18 @@ import { createMessage, deleteMessageById, getMessageById } from "../database/me
 export const router = express.Router()
 
 router.post("/create-message", async (req, res) => {
+    const authorId = res.locals.user?.id
+    
+    if (!authorId) {
+        return res.status(400).render("400", {
+            error: "You need to be logged in to send a message"
+        })
+    }
+
     const newMsg = {
         text: req.body.text,
         chatroomId: req.body.chatroomId,
-        authorId: res.locals.user.id
+        authorId: authorId
     }
     await createMessage(newMsg)
 
@@ -18,29 +26,13 @@ router.get("/delete-message/:id", async (req, res) => {
     const idToDelete = req.params.id
     const userId = res.locals.user.id
     
-    try {
-        const message = await getMessageById(idToDelete)
-        
-        if (!message) {
-            return res.status(400).render("400", {
-                error: "Message does not exist"
-            })
-        }
-
-        if (message.authorId === userId) {
-            await deleteMessageById(idToDelete)
-            res.redirect("back")
-        } else {
-            console.error("User not authorized to delete this message")
-            return res.status(400).render("400", {
-                error: "User not authorized to delete this message"
-            })
-        }
-    } catch (e) {
-        return res.status(500).render("500", {
-            error: "An error occurred while deleting the message"
-        })
-        //return res.status(500).json({ error: "An error occurred while deleting the message" })
-    }
+    const messageToDelete = await getMessageById(idToDelete)
     
+    if (messageToDelete && messageToDelete.authorId === userId){
+        await deleteMessageById(idToDelete)
+    } else {
+        console.log("A message can only be deleted by its author")
+        return res.redirect("back")
+    }
+    res.redirect("back")
 })
