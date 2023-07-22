@@ -3,6 +3,7 @@ import { db } from "./database.js"
 import cookieParser from "cookie-parser"
 import { router as chatroomsRouter } from "./routes/chatrooms.js"
 import { router as usersRouter } from "./routes/users.js"
+import { router as messagesRouter } from "./routes/messages.js"
 import loadUser from "./middlewares/loadUser.js"
 
 export const app = express()
@@ -25,5 +26,6 @@ app.get("/", async (req, res) => {
     })
 })
 
-app.use(chatroomsRouter)
 app.use(usersRouter)
+app.use(chatroomsRouter)
+app.use(messagesRouter)

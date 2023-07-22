@@ -32,3 +32,13 @@ export const getUserById = async (userId) => {
     return user
 }
 
+/* 
+//for later
+export const deleteUserById = async (userId) => {
+    try {
+        await db("users").delete().where("id", userId)
+    } catch(e) {
+        console.error(e)
+    }
+}
+*/
