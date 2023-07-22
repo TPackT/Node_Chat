@@ -14,6 +14,7 @@
           <li class="messages-item">
             <%= message.text %>
             <%= message.authorId %>
+            <%= message.cts.split(" ")[1] %>
             <a href="/delete-message/<%= message.id%>">Delete</a>
           </li>
           <% } %>
