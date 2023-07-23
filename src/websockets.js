@@ -38,7 +38,6 @@ export const sendMessagesToAllConnections = async (chatroomId) => {
 
   for (const connection of connections) {
     const {user} = connection
-    console.log(user)
     if (user) {
       const userId = user.id
       
