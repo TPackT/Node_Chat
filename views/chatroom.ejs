@@ -19,9 +19,15 @@
       <script>
         const ws = new WebSocket("ws://localhost:3000")
 
-        ws.addEventListener("message", (message) => {
-          console.log(message.data)
-        })
+        ws.addEventListener("message", (ev) => {
+        const message = JSON.parse(ev.data)
+
+        document.getElementById("messages").innerHTML = message.html
+      })
+        document.querySelector('form').scrollIntoView()
+    
+    
+    
 
       </script>
 
