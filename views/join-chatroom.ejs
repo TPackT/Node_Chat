@@ -1,0 +1,14 @@
+
+<%- include("_header") %>
+    
+    <div class="chatroom">
+      <h3><%= chatroom.name %></h3>
+      <form action="/join-chatroom/<%= chatroom.id %>" method="post">
+        <input type="password" name="password" placeholder="Enter password" required />
+        <button type="submit">Join</button>
+      </form>
+    </div>
+
+  <a href="/">Back to main page</a>
+
+  <%- include("_footer") %>

@@ -2,17 +2,10 @@
 
     
 
-    <ul style="list-style-type: none">
-        <% for (const chatroom of chatrooms) { %>
-          <li class="chatrooms-item">
-            <%= chatroom.id %>
-            <%= chatroom.name %>
-            <%= chatroom.authorId %>
-            <a href="/chatroom/<%=chatroom.id%>">Join</a>
-            <a href="/delete-chatroom/<%=chatroom.id%>">Delete</a>
-          </li>
-          <% } %>
-      </ul>
+
+      <div id="chatrooms">
+        <%- include("_chatrooms") %>
+      </div>
 
       <form action="/create-chatroom" method="post">
         <input type="text" name="name">
