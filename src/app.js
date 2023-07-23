@@ -20,7 +20,7 @@ app.get("/", requireAuth, async (req, res) => {
     const messages = await db("messages").select("*")
     const chatrooms = await db("chatrooms").select("*")
     
-
+""
     res.render("index", {
         messages: messages,
         chatrooms: chatrooms,

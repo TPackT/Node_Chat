@@ -22,3 +22,12 @@ export const getChatroomById = async (chatroomId) => {
     const chatroom = await db("chatrooms").where("id", chatroomId).first()
     return chatroom 
 }
+
+export const verifyChatroomPassword = async (chatroom, password) => {
+    const { salt, hash } = chatroom
+    const enteredHash = crypto.pbkdf2Sync(password, salt, 100000, 64, "sha512").toString("hex")
+    //incorrect password
+    if (hash !== enteredHash) {
+      console.error(e)
+    }
+}

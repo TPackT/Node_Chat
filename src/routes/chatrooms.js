@@ -1,6 +1,7 @@
 import express from "express"
+import crypto from "crypto"
 import { db } from "../database.js"
-import { createChatroom, getChatroomById, deleteChatroom } from "../database/chatrooms.js"
+import { createChatroom, getChatroomById, deleteChatroom, verifyChatroomPassword } from "../database/chatrooms.js"
 import { getAllMessagesByChatroom, getAllMessagesWithUsernames } from "../database/messages.js"
 
 export const router = express.Router()
@@ -58,3 +59,34 @@ router.get("/delete-chatroom/:id", async (req, res) => {
 router.post("/update-chatroom", async (req, res) => {
 
 })
+
+
+router.get("/join-chatroom/:id", async (req, res) => {
+    const chatroomId = req.params.id
+
+    const chatroom = await getChatroomById(chatroomId)
+
+    if (!chatroom) {
+      return res.redirect("/")
+    }
+
+    res.render("join-chatroom", { chatroom })
+})
+
+router.post("/join-chatroom/:id", async (req, res) => {
+    const chatroomId = req.params.id
+    const password = req.body.password
+  
+    const chatroom = await getChatroomById(chatroomId)
+
+    if(!chatroom) {
+      return res.redirect("/")
+    }
+
+    try {
+        await verifyChatroomPassword(chatroom, password)
+        res.redirect(`/chatroom/${chatroomId}`)
+    } catch (e) {
+        return res.redirect(`/join-chatroom/${chatroomId}`)
+    }
+  })
