@@ -1,10 +1,12 @@
 import express from "express"
 import { createMessage, deleteMessageById, getMessageById } from "../database/messages.js"
+import { sendMessagesToAllConnections } from "../websockets.js"
 
 export const router = express.Router()
 
 router.post("/create-message", async (req, res) => {
     const authorId = res.locals.user?.id
+    const chatroomId = req.body.chatroomId
     
     if (!authorId) {
         return res.status(400).render("400", {
@@ -14,10 +16,12 @@ router.post("/create-message", async (req, res) => {
 
     const newMsg = {
         text: req.body.text,
-        chatroomId: req.body.chatroomId,
+        chatroomId: chatroomId,
         authorId: authorId
     }
     await createMessage(newMsg)
+
+    sendMessagesToAllConnections(chatroomId)
 
     res.redirect("back")
 })
@@ -25,8 +29,9 @@ router.post("/create-message", async (req, res) => {
 router.get("/delete-message/:id", async (req, res) => {
     const idToDelete = req.params.id
     const userId = res.locals.user.id
-    
+
     const messageToDelete = await getMessageById(idToDelete)
+    const chatroomId = messageToDelete.chatroomId
     
     if (messageToDelete && messageToDelete.authorId === userId){
         await deleteMessageById(idToDelete)
@@ -34,5 +39,8 @@ router.get("/delete-message/:id", async (req, res) => {
         console.log("A message can only be deleted by its author")
         return res.redirect("back")
     }
+
+    sendMessagesToAllConnections(chatroomId)
+
     res.redirect("back")
 })

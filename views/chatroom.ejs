@@ -16,4 +16,19 @@
         <button type="submit">Send</button>
       </form>
 
+      <script>
+        const ws = new WebSocket("ws://localhost:3000")
+
+        ws.addEventListener("message", (ev) => {
+        const message = JSON.parse(ev.data)
+
+        document.getElementById("messages").innerHTML = message.html
+      })
+        document.querySelector('form').scrollIntoView()
+    
+    
+    
+
+      </script>
+
       <%- include("_footer") %>
