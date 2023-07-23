@@ -18,10 +18,12 @@ router.get("/chatroom/:id", async (req, res) => {
     const chatroom = await getChatroomById(chatroomId)
     const messages = await getAllMessagesByChatroom(chatroomId)
     const messagesWithUsernames = await getAllMessagesWithUsernames(messages)
+    const userId = res.locals.user.id
     
     res.render("chatroom", {
         chatroom: chatroom, 
         messages: messagesWithUsernames,
+        userId: userId
     })
 })
 
