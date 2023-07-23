@@ -1,34 +1,30 @@
 <%- include("_header") %>
 
     <h2><%= chatroom.name %></h2>
-
     <a href="/">Back to main page</a>
 
-
+    
     <div id="messages">
       <%- include("_messages") %>
     </div>
 
     
-      <form action="/create-message" method="post"">
-        <input type="text" name="text">
-        <input type="hidden" name="chatroomId" value="<%= chatroom.id %>" />
-        <button type="submit">Send</button>
-      </form>
+    <form action="/create-message" method="post"">
+      <input type="text" name="text">
+      <input type="hidden" name="chatroomId" value="<%= chatroom.id %>" />
+      <button type="submit">Send</button>
+    </form>
 
-      <script>
-        const ws = new WebSocket("ws://localhost:3000")
+    <script>
+      const ws = new WebSocket("ws://localhost:3000")
 
-        ws.addEventListener("message", (ev) => {
-        const message = JSON.parse(ev.data)
+      ws.addEventListener("message", (ev) => {
+      const message = JSON.parse(ev.data)
 
-        document.getElementById("messages").innerHTML = message.html
+      document.getElementById("messages").innerHTML = message.html
       })
-        document.querySelector('form').scrollIntoView()
-    
-    
-    
+      document.querySelector('form').scrollIntoView()
 
-      </script>
+    </script>
 
-      <%- include("_footer") %>
+<%- include("_footer") %>
