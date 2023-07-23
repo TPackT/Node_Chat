@@ -44,6 +44,7 @@ export const deleteAllMessagesByChatroomId = async(chatroomId) => {
     }
 }
 
+
 export const getMessageById = async (messageId) => {
     try {
         const message = await db("messages").where("id", messageId).first()
@@ -51,4 +52,9 @@ export const getMessageById = async (messageId) => {
     } catch (e) {
         console.error(e)
     }
+}
+
+export const getMessageCountByChatroomId = async (chatroomId) => {
+    const messageCount = await db("messages").count("* as count").where("chatroomId", chatroomId).first()
+    return messageCount
 }
