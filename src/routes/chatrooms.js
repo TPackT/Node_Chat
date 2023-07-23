@@ -1,5 +1,4 @@
 import express from "express"
-import { db } from "../database.js"
 import { createChatroom, getChatroomById, deleteChatroom, verifyChatroomPassword } from "../database/chatrooms.js"
 import { getAllMessagesByChatroom, getAllMessagesWithUsernames, getMessageCountByChatroomId } from "../database/messages.js"
 

@@ -1,0 +1,28 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  ul{
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    padding: 0;
+  }
+  .messages-item{
+    padding:10px;
+    border-radius: 6px;
+    width: fit-content;
+    max-width: 60%;
+    background-color: rgb(209, 212, 216);
+    margin-bottom: 10px;
+    overflow-wrap: break-word;
+  }
+  .messages-item > p{
+    margin: 0;
+  }
+  .messages-item.own-message{
+    align-self: flex-end;
+    background-color: rgb(78, 78, 248);
+    color: white;
+  }
