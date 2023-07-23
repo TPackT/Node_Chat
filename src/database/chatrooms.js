@@ -1,5 +1,6 @@
 import { db } from "../database.js"
 import crypto from "crypto"
+import { deleteAllMessagesByChatroomId } from "./messages.js"
 
 export const createChatroom = async (name, password, authorId) => {
     const salt = crypto.randomBytes(16).toString("hex")
@@ -13,6 +14,7 @@ export const createChatroom = async (name, password, authorId) => {
 export const deleteChatroom = async(chatroomId) => {
     try {
         await db("chatrooms").delete().where("id", chatroomId)
+        await deleteAllMessagesByChatroomId(chatroomId)
     } catch (e) {
         console.error(e)
     }

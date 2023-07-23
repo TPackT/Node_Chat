@@ -36,6 +36,14 @@ export const deleteMessageById = async (messageId) => {
     }
 }
 
+export const deleteAllMessagesByChatroomId = async(chatroomId) => {
+    try {
+        await db("messages").delete().where("chatroomId", chatroomId)
+    } catch (e) {
+        console.error(e)
+    }
+}
+
 export const getMessageById = async (messageId) => {
     try {
         const message = await db("messages").where("id", messageId).first()
