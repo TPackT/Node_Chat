@@ -58,3 +58,9 @@ export const getMessageCountByChatroomId = async (chatroomId) => {
     const messageCount = await db("messages").count("* as count").where("chatroomId", chatroomId).first()
     return messageCount
 }
+
+export const updateMessageLikeStatus = async(chatroomId, likeList, likeCount) => {
+    const updatedLikeStatus = await db("messages").update({ likeList: JSON.stringify(likeList), likeCount: likeCount })
+    .where("id", chatroomId)
+    return updatedLikeStatus
+}
