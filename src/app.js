@@ -10,6 +10,7 @@ import requireAuth from "./middlewares/requireAuth.js"
 export const app = express()
 app.set("view engine", "ejs")
 
+app.use(express.static("public"))
 app.use(express.urlencoded({extended: true}))
 //middleware for form values formatting
 app.use(cookieParser())
