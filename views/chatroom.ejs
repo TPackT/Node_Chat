@@ -17,11 +17,11 @@
 
     <script>
       const chatroomId = "<%= chatroom.id %>"
+      console.log(chatroomId)
       const ws = new WebSocket(`ws://localhost:3000/${chatroomId}`)
 
       ws.addEventListener("message", (ev) => {
       const message = JSON.parse(ev.data)
-
       document.getElementById("messages").innerHTML = message.html
       })
       document.querySelector('form').scrollIntoView()

@@ -21,7 +21,7 @@ router.post("/create-message", async (req, res) => {
     }
     await createMessage(newMsg)
 
-    sendMessagesToAllConnections(chatroomId)
+    await sendMessagesToAllConnections(chatroomId)
 
     res.redirect("back")
 })
@@ -40,7 +40,7 @@ router.get("/delete-message/:id", async (req, res) => {
         return res.redirect("back")
     }
 
-    sendMessagesToAllConnections(chatroomId)
+    await sendMessagesToAllConnections(chatroomId)
 
     res.redirect("back")
 })
@@ -75,7 +75,7 @@ router.get("/like-message/:id", async (req, res, next) => {
 
     await updateMessageLikeStatus(idToLike, updatedLikeList, updatedLikeCount)
 
-    sendMessagesToAllConnections(chatroomId)
+    await sendMessagesToAllConnections(chatroomId)
     
     res.redirect("back")
   })

@@ -23,6 +23,7 @@ export const createWebSocketServer = (server) => {
         }
 
         connectionsByChatroom.get(chatroomId).add(ws)
+        ws.chatroomId = chatroomId
         console.log(`User ${user.id} connected to chatroom ${chatroomId}`)
         console.log("New connection", connectionsByChatroom.size)
 
@@ -39,7 +40,7 @@ export const createWebSocketServer = (server) => {
       const { chatroomId } = ws
       if (chatroomId && connectionsByChatroom.has(chatroomId)) {
         // Remove the WebSocket connection from the chatroom's set
-        connectionsByChatroom.get(chatroomId).delete(ws);
+        connectionsByChatroom.get(chatroomId).delete(ws)
         console.log(`User ${ws.user.id} disconnected from chatroom ${chatroomId}`)
       }
     })
@@ -49,9 +50,9 @@ export const createWebSocketServer = (server) => {
 export const sendMessagesToAllConnections = async (chatroomId) => {
   const messages = await getAllMessagesByChatroom(chatroomId)
   const messagesWithUsernames = await getAllMessagesWithUsernames(messages)
-
-
-  const chatroomConnections = connectionsByChatroom.get(chatroomId)
+  
+  const chatroomConnections = connectionsByChatroom.get(String(chatroomId))
+  
   if  (chatroomConnections) {
   for (const connection of chatroomConnections) {
     const {user} = connection
