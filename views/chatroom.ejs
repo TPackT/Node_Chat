@@ -16,7 +16,8 @@
     </form>
 
     <script>
-      const ws = new WebSocket("ws://localhost:3000")
+      const chatroomId = "<%= chatroom.id %>"
+      const ws = new WebSocket(`ws://localhost:3000/${chatroomId}`)
 
       ws.addEventListener("message", (ev) => {
       const message = JSON.parse(ev.data)
