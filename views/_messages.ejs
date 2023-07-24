@@ -7,6 +7,16 @@
         <%= message.author %>
         <%= message.cts.split(" ")[1] %>
         <a href="/delete-message/<%= message.id%>">Delete</a>
+        
+        <a href="/like-message/<%= message.id %>">
+          <% if (message.likeList.includes(userId)) { %>
+            Liked
+          <% } else { %>
+            Unliked
+          <% } %>
+        </a>
+        <%= message.likeCount %>
+      
       </li>
       <% } %>
   </ul>

@@ -1,5 +1,5 @@
 import express from "express"
-import { createMessage, deleteMessageById, getMessageById } from "../database/messages.js"
+import { createMessage, deleteMessageById, getMessageById, updateMessageLikeStatus } from "../database/messages.js"
 import { sendMessagesToAllConnections } from "../websockets.js"
 
 export const router = express.Router()
@@ -44,3 +44,38 @@ router.get("/delete-message/:id", async (req, res) => {
 
     res.redirect("back")
 })
+
+
+router.get("/like-message/:id", async (req, res, next) => {
+    const idToLike = Number(req.params.id)
+    const msgToLike = await getMessageById(idToLike)
+
+    const chatroomId = msgToLike.chatroomId
+
+
+    if (!msgToLike) {
+        return next()
+    }
+
+    const userId = res.locals.user.id
+    
+    const likeList = JSON.parse(msgToLike.likeList); // parse the likeList as an array
+
+    const isLiked = likeList.includes(userId)
+
+    const updatedLikeValue = !isLiked
+    const updatedLikeList = updatedLikeValue
+        ? [...likeList, userId] // add user to array
+        : likeList.filter((id) => id !== userId) // remove user from array
+
+    const updatedLikeCount = updatedLikeList.length
+
+    console.log(updatedLikeList)
+    console.log(updatedLikeCount)
+
+    await updateMessageLikeStatus(idToLike, updatedLikeList, updatedLikeCount)
+
+    sendMessagesToAllConnections(chatroomId)
+    
+    res.redirect("back")
+  })
