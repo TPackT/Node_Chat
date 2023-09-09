@@ -1,0 +1,17 @@
+- Websockets not working when deployed on render
+    - Needs adjustment of ws url
+- Missing tests
+    - add tests
+
+- No indication of online users
+    - add user tracking for separate chatrooms
+    - add announcement of a user logging in/off
+
+- User focused functionality
+    - add user customisation
+    - allow users to add friends 
+    - allow users to start private messages between 2 users
+    
+
+Link:
+https://node-chat-co2z.onrender.com

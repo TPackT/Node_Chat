@@ -18,7 +18,8 @@
     <script>
       const chatroomId = "<%= chatroom.id %>"
       console.log(chatroomId)
-      const ws = new WebSocket(`ws://localhost:3000/${chatroomId}`)
+      //const ws = new WebSocket(`ws://localhost:3000/${chatroomId}`) 
+      const ws = new WebSocket(`wss://node-chat-co2z.onrender.com/${chatroomId}`)
 
       ws.addEventListener("message", (ev) => {
       const message = JSON.parse(ev.data)
